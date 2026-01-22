@@ -210,18 +210,6 @@ let targets: [CustomTarget] = [
 
   .target(
     kind: .exported,
-    name: "BitCollections",
-    dependencies: ["CandleInternalCollectionsUtilities"],
-    exclude: ["CMakeLists.txt"]),
-  .target(
-    kind: .test,
-    name: "BitCollectionsTests",
-    dependencies: [
-      "BitCollections", "_CollectionsTestSupport", "CandleOrderedCollections"
-    ]),
-
-  .target(
-    kind: .exported,
     name: "CandleDequeModule",
     dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
@@ -270,33 +258,13 @@ let targets: [CustomTarget] = [
     kind: .test,
     name: "RopeModuleTests",
     dependencies: ["_RopeModule", "_CollectionsTestSupport"]),
-
-  .target(
-    kind: .exported,
-    name: "Collections",
-    dependencies: [
-      "BitCollections",
-      "CandleDequeModule",
-      "HashTreeCollections",
-      "HeapModule",
-      "CandleOrderedCollections",
-      "_RopeModule",
-    ],
-    exclude: ["CMakeLists.txt"])
 ]
 
 var _products: [Product] = []
 var _targets: [Target] = []
 if defines.contains("COLLECTIONS_SINGLE_MODULE") {
-  _products = [
-    .library(name: "Collections", targets: ["Collections"]),
-  ]
-  _targets = [
-    targets.toMonolithicTarget(name: "Collections"),
-    targets.toMonolithicTestTarget(
-      name: "CollectionsTests",
-    dependencies: ["Collections"]),
-  ]
+  _products = []
+  _targets = []
 } else {
   _products = targets.compactMap { t in
     guard t.kind == .exported else { return nil }
