@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension BitArray: RangeReplaceableCollection {}
@@ -26,7 +26,7 @@ extension BitArray {
     let wordCount = _Word.wordCount(forBitCount: UInt(n))
     _storage.reserveCapacity(wordCount)
   }
-  
+
   /// Creates a new, empty bit array.
   ///
   /// - Complexity: O(1)
@@ -75,7 +75,7 @@ extension BitArray {
     self.reserveCapacity(elements.underestimatedCount)
     self.append(contentsOf: elements)
   }
-  
+
   // Specializations
 
   /// Creates a new bit array containing the Boolean values in a sequence.
@@ -114,7 +114,7 @@ extension BitArray {
     if range.count < c {
       _extend(by: c - range.count)
     }
-  
+
     _copy(from: range.upperBound ..< origCount, to: range.lowerBound + c)
 
     if c < range.count {
@@ -165,7 +165,7 @@ extension BitArray {
     }
     _checkInvariants()
   }
-  
+
   /// Replaces the specified subrange of bits with the values in the given
   /// collection.
   ///
@@ -255,7 +255,7 @@ extension BitArray {
     }
     _checkInvariants()
   }
-  
+
   /// Adds the elements of a sequence or collection to the end of this
   /// bit array.
   ///
@@ -300,7 +300,7 @@ extension BitArray {
     }
     _checkInvariants()
   }
-  
+
   /// Adds the elements of a sequence or collection to the end of this
   /// bit array.
   ///
@@ -367,7 +367,7 @@ extension BitArray {
     }
     _checkInvariants()
   }
-  
+
   /// Inserts the elements of a collection into the bit array at the specified
   /// position.
   ///
@@ -390,7 +390,7 @@ extension BitArray {
     guard c > 0 else { return }
     _extend(by: c)
     _copy(from: i ..< count - c, to: i + c)
-    
+
     if let newElements = _specialize(newElements, for: BitArray.self) {
       _copy(from: newElements, to: i)
     } else if let newElements = _specialize(
@@ -487,7 +487,7 @@ extension BitArray {
     _removeLast(range.count)
     _checkInvariants()
   }
-  
+
   public mutating func _customRemoveLast() -> Bool? {
     precondition(_count > 0)
     let result = self[count - 1]
@@ -519,7 +519,7 @@ extension BitArray {
     _checkInvariants()
     return result
   }
-  
+
   /// Removes the specified number of elements from the beginning of the
   /// bit array.
   ///

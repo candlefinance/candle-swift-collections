@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension TreeDictionary {
@@ -28,7 +28,7 @@ extension TreeDictionary {
       self._base = _base
     }
   }
-  
+
   /// A collection containing just the keys of the dictionary.
   ///
   /// - Complexity: O(1)
@@ -291,7 +291,7 @@ extension TreeDictionary.Keys {
 
 extension TreeDictionary.Keys: Equatable {
   /// Returns a Boolean value indicating whether two values are equal.
-  /// 
+  ///
   /// Equality is the inverse of inequality. For any values `a` and `b`,
   /// `a == b` implies that `a != b` is `false`.
   ///

@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 /// A sorted collection of small nonnegative integers, implemented as an

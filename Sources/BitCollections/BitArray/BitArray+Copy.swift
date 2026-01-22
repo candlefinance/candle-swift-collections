@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension BitArray {
@@ -105,13 +105,13 @@ extension BitArray._UnsafeHandle {
       target >= 0 && target + range.count <= count,
       "Target out of bounds")
     guard !range.isEmpty else { return }
-    
+
     func goForward() -> Bool {
       let target = _BitPosition(target).split
       let lowerSource = _BitPosition(range.lowerBound).split
       let upperSource = _BitPosition(range.upperBound).endSplit
 
-      
+
       let targetPtr = _words._ptr(at: target.word)
       let lowerSourcePtr = source._ptr(at: lowerSource.word)
       let upperSourcePtr = source._ptr(at: upperSource.word)
@@ -127,7 +127,7 @@ extension BitArray._UnsafeHandle {
       }
       return false
     }
-    
+
     if goForward() {
       // Copy forward from a disjoint or following overlapping range.
       var src = _ChunkedBitsForwardIterator(words: source, range: range)

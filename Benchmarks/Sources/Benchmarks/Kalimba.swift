@@ -9,7 +9,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-import DequeModule
+import CandleDequeModule
 
 extension Sequence {
   func kalimbaOrdered() -> [Element] {

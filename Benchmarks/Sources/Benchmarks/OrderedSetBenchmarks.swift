@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 import CollectionsBenchmark
-import OrderedCollections
+import CandleOrderedCollections
 
 extension Benchmark {
   public mutating func addOrderedSetBenchmarks() {
@@ -555,7 +555,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedSet<Int> equality, unique",
       input: Int.self
@@ -568,7 +568,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedSet<Int> equality, shared",
       input: Int.self
@@ -581,7 +581,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedSet<Int>.SubSequence equality, unique",
       input: Int.self
@@ -594,7 +594,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedSet<Int>.SubSequence equality, shared",
       input: Int.self

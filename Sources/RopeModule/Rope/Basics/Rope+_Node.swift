@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if swift(<5.8) && !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities // for 5.8 polyfills
+import CandleInternalCollectionsUtilities // for 5.8 polyfills
 #endif
 
 extension Rope {
@@ -71,25 +71,25 @@ extension Rope._Node {
 
   @inlinable @inline(__always)
   internal var height: UInt8 { header.height }
-  
+
   @inlinable @inline(__always)
   internal var isLeaf: Bool { height == 0 }
-  
+
   @inlinable @inline(__always)
   internal var asLeaf: _Storage<_Item> {
     assert(height == 0)
     return unsafeDowncast(object, to: _Storage<_Item>.self)
   }
-  
+
   @inlinable @inline(__always)
   internal var asInner: _Storage<Self> {
     assert(height > 0)
     return unsafeDowncast(object, to: _Storage<Self>.self)
   }
-  
+
   @inlinable @inline(__always)
   internal var childCount: Int { header.childCount }
-  
+
   @inlinable
   internal var isEmpty: Bool { childCount == 0 }
 
@@ -176,7 +176,7 @@ extension Rope._Node {
       return body(handle)
     }
   }
-  
+
   @inlinable @inline(__always)
   internal mutating func updateLeaf<R>(
     _ body: (_UnsafeHandle<_Item>) -> R
@@ -186,7 +186,7 @@ extension Rope._Node {
       return body(handle)
     }
   }
-  
+
   @inlinable @inline(__always)
   internal func readInner<R>(
     _ body: (_UnsafeHandle<Self>) -> R
@@ -196,7 +196,7 @@ extension Rope._Node {
       return body(handle)
     }
   }
-  
+
   @inlinable @inline(__always)
   internal mutating func updateInner<R>(
     _ body: (_UnsafeHandle<Self>) -> R
@@ -310,7 +310,7 @@ extension Rope._Node {
     swap(&self, &left)
     return true
   }
-  
+
   /// Shift children between `left` and `right` such that the number of children in `left`
   /// becomes `target`.
   @inlinable
@@ -323,13 +323,13 @@ extension Rope._Node {
     assert(target >= 0 && target <= Summary.maxNodeSize)
     left.ensureUnique()
     right.ensureUnique()
-    
+
     let lc = left.childCount
     let rc = right.childCount
     let target = Swift.min(target, lc + rc)
     let d = target - lc
     if d == 0 { return }
-    
+
     if d > 0 {
       left.appendChildren(movingFromPrefixOf: &right, count: d)
     } else {

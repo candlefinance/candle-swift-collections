@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension _HashNode {
@@ -575,4 +575,3 @@ extension _HashNode {
     return (r.leaf, r.slot2)
   }
 }
-

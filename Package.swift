@@ -141,9 +141,11 @@ extension Array where Element == CustomTarget {
         "CMakeLists.txt",
         "BitCollections/BitCollections.docc",
         "Collections/Collections.docc",
+        "CandleDequeModule/DequeModule.docc",
         "DequeModule/DequeModule.docc",
         "HashTreeCollections/HashTreeCollections.docc",
         "HeapModule/HeapModule.docc",
+        "CandleOrderedCollections/OrderedCollections.docc",
         "OrderedCollections/OrderedCollections.docc",
       ] + targets.flatMap { t in
         t.exclude.map { "\(t.name)/\($0)" }
@@ -178,14 +180,14 @@ let targets: [CustomTarget] = [
   .target(
     kind: .testSupport,
     name: "_CollectionsTestSupport",
-    dependencies: ["InternalCollectionsUtilities"]),
+    dependencies: ["CandleInternalCollectionsUtilities"]),
   .target(
     kind: .test,
     name: "CollectionsTestSupportTests",
     dependencies: ["_CollectionsTestSupport"]),
   .target(
     kind: .hidden,
-    name: "InternalCollectionsUtilities",
+    name: "CandleInternalCollectionsUtilities",
     exclude: [
       "CMakeLists.txt",
       "Compatibility/UnsafeMutableBufferPointer+SE-0370.swift.gyb",
@@ -209,29 +211,29 @@ let targets: [CustomTarget] = [
   .target(
     kind: .exported,
     name: "BitCollections",
-    dependencies: ["InternalCollectionsUtilities"],
+    dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
   .target(
     kind: .test,
     name: "BitCollectionsTests",
     dependencies: [
-      "BitCollections", "_CollectionsTestSupport", "OrderedCollections"
+      "BitCollections", "_CollectionsTestSupport", "CandleOrderedCollections"
     ]),
 
   .target(
     kind: .exported,
-    name: "DequeModule",
-    dependencies: ["InternalCollectionsUtilities"],
+    name: "CandleDequeModule",
+    dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
   .target(
     kind: .test,
     name: "DequeTests",
-    dependencies: ["DequeModule", "_CollectionsTestSupport"]),
+    dependencies: ["CandleDequeModule", "_CollectionsTestSupport"]),
 
   .target(
     kind: .exported,
     name: "HashTreeCollections",
-    dependencies: ["InternalCollectionsUtilities"],
+    dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
   .target(
     kind: .test,
@@ -241,7 +243,7 @@ let targets: [CustomTarget] = [
   .target(
     kind: .exported,
     name: "HeapModule",
-    dependencies: ["InternalCollectionsUtilities"],
+    dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
   .target(
     kind: .test,
@@ -250,18 +252,18 @@ let targets: [CustomTarget] = [
 
   .target(
     kind: .exported,
-    name: "OrderedCollections",
-    dependencies: ["InternalCollectionsUtilities"],
+    name: "CandleOrderedCollections",
+    dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
   .target(
     kind: .test,
     name: "OrderedCollectionsTests",
-    dependencies: ["OrderedCollections", "_CollectionsTestSupport"]),
+    dependencies: ["CandleOrderedCollections", "_CollectionsTestSupport"]),
 
   .target(
     kind: .exported,
     name: "_RopeModule",
-    dependencies: ["InternalCollectionsUtilities"],
+    dependencies: ["CandleInternalCollectionsUtilities"],
     directory: "RopeModule",
     exclude: ["CMakeLists.txt"]),
   .target(
@@ -274,10 +276,10 @@ let targets: [CustomTarget] = [
     name: "Collections",
     dependencies: [
       "BitCollections",
-      "DequeModule",
+      "CandleDequeModule",
       "HashTreeCollections",
       "HeapModule",
-      "OrderedCollections",
+      "CandleOrderedCollections",
       "_RopeModule",
     ],
     exclude: ["CMakeLists.txt"])

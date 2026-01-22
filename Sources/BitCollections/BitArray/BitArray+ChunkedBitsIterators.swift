@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 internal struct _ChunkedBitsForwardIterator {
@@ -19,7 +19,7 @@ internal struct _ChunkedBitsForwardIterator {
   internal let words: UnsafeBufferPointer<_Word>
   internal let end: _BitPosition
   internal var position: _BitPosition
-  
+
   internal init(
     words: UnsafeBufferPointer<_Word>,
     range: Range<Int>
@@ -30,7 +30,7 @@ internal struct _ChunkedBitsForwardIterator {
     self.end = _BitPosition(range.upperBound)
     self.position = _BitPosition(range.lowerBound)
   }
-  
+
   mutating func next() -> (bits: _Word, count: UInt)? {
     guard position < end else { return nil }
     let (w, b) = position.split
@@ -54,7 +54,7 @@ internal struct _ChunkedBitsBackwardIterator {
   internal let words: UnsafeBufferPointer<_Word>
   internal let start: _BitPosition
   internal var position: _BitPosition
-  
+
   internal init(
     words: UnsafeBufferPointer<_Word>,
     range: Range<Int>
@@ -65,7 +65,7 @@ internal struct _ChunkedBitsBackwardIterator {
     self.start = _BitPosition(range.lowerBound)
     self.position = _BitPosition(range.upperBound)
   }
-  
+
   internal mutating func next() -> (bits: _Word, count: UInt)? {
     guard position > start else { return nil }
     let (w, b) = position.endSplit

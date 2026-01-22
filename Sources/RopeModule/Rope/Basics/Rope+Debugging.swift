@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension Rope._UnmanagedLeaf: CustomStringConvertible {
@@ -69,9 +69,9 @@ extension Rope._Node {
     restPrefix: String = ""
   ) {
     print("\(firstPrefix)\(description)")
-    
+
     guard heightLimit > 0 else { return }
-    
+
     if height > 0 {
       readInner {
         let c = $0.children

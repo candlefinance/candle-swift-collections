@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 /// An ordered, random-access collection of `Bool` values, implemented as an
@@ -74,7 +74,7 @@ extension BitArray {
       return try body(&handle)
     }
   }
-  
+
   internal mutating func _removeLast() {
     assert(_count > 0)
     _count -= 1

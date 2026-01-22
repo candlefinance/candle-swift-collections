@@ -12,7 +12,7 @@
 #if swift(>=5.8)
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 @available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
@@ -198,7 +198,7 @@ extension BigString.UnicodeScalarView: RangeReplaceableCollection {
   }
 
   public mutating func replaceSubrange(
-    _ subrange: Range<Index>, 
+    _ subrange: Range<Index>,
     with newElements: __owned some Sequence<UnicodeScalar> // Note: Sequence, not Collection
   ) {
     if let newElements = _specialize(
@@ -224,7 +224,7 @@ extension BigString.UnicodeScalarView: RangeReplaceableCollection {
   }
 
   public mutating func replaceSubrange(
-    _ subrange: Range<Index>, 
+    _ subrange: Range<Index>,
     with newElements: __owned String.UnicodeScalarView
   ) {
     _base._replaceSubrange(subrange, with: String(newElements))
@@ -238,14 +238,14 @@ extension BigString.UnicodeScalarView: RangeReplaceableCollection {
   }
 
   public mutating func replaceSubrange(
-    _ subrange: Range<Index>, 
+    _ subrange: Range<Index>,
     with newElements: __owned BigString.UnicodeScalarView
   ) {
     _base._replaceSubrange(subrange, with: newElements._base)
   }
 
   public mutating func replaceSubrange(
-    _ subrange: Range<Index>, 
+    _ subrange: Range<Index>,
     with newElements: __owned BigSubstring.UnicodeScalarView
   ) {
     _base._replaceSubrange(subrange, with: newElements._base, in: newElements._bounds)

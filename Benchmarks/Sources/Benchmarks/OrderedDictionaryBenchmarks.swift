@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 import CollectionsBenchmark
-import OrderedCollections
+import CandleOrderedCollections
 
 extension Benchmark {
   public mutating func addOrderedDictionaryBenchmarks() {
@@ -539,7 +539,7 @@ extension Benchmark {
         blackHole(d)
       }
     }
-    
+
     self.add(
       title: "OrderedDictionary<Int, Int> equality, unique",
       input: [Int].self
@@ -553,7 +553,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedDictionary<Int, Int> equality, shared",
       input: [Int].self
@@ -567,7 +567,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedDictionary<Int, Int>.Values equality, unique",
       input: [Int].self
@@ -581,7 +581,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "OrderedDictionary<Int, Int>.Values equality, shared",
       input: [Int].self
@@ -595,6 +595,6 @@ extension Benchmark {
         }
       }
     }
-    
+
   }
 }

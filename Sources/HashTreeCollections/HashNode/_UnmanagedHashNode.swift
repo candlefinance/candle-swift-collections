@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 /// An unsafe, unowned, type-erased reference to a hash tree node; essentially
@@ -106,4 +106,3 @@ extension _UnmanagedHashNode {
     }
   }
 }
-

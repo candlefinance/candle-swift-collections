@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension BitSet {
@@ -247,4 +247,3 @@ extension _UnsafeBitSet {
     return _words[upper.word] == uw
   }
 }
-

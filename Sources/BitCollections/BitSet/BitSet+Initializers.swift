@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension BitSet {
@@ -36,7 +36,7 @@ extension BitSet {
     _shrink()
     _checkInvariants()
   }
-  
+
   /// Initialize a new bit set from the raw bits of the supplied sequence of
   /// words. (The term "words" is used here to mean a sequence of `UInt`
   /// values, as in the `words` property of `BinaryInteger`.)
@@ -53,7 +53,7 @@ extension BitSet {
   public init(words: some Sequence<UInt>) {
     self.init(_words: words.map { _Word($0) })
   }
-  
+
   /// Initialize a new bit set from the raw bits of the supplied integer value.
   ///
   /// The resulting bit set will contain precisely those integers that

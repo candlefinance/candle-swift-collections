@@ -11,7 +11,7 @@
 
 import CollectionsBenchmark
 import Benchmarks
-import DequeModule
+import CandleDequeModule
 
 if Deque<Int>._isConsistencyCheckingEnabled {
   complain("""

@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #if !COLLECTIONS_SINGLE_MODULE
-import InternalCollectionsUtilities
+import CandleInternalCollectionsUtilities
 #endif
 
 extension Rope {
@@ -38,12 +38,12 @@ extension Rope {
     //     ──╨─╨─╨─╨──╨──╨──╨─╨─╨─╨──
     // →prefixTrees→  ↑  ↑  ←suffixTrees←
     //           prefix  suffix
-    
+
     @usableFromInline internal var _prefixTrees: [Rope] = []
     @usableFromInline internal var _prefixLeaf: Rope._Node?
 
     @usableFromInline internal var _prefix: Rope._Item?
-    
+
     @usableFromInline internal var _suffix: Rope._Item?
     @usableFromInline internal var _suffixTrees: [Rope] = []
 
@@ -56,7 +56,7 @@ extension Rope {
       if let leaf = self._prefixLeaf, !leaf.isEmpty { return false }
       return _prefixTrees.isEmpty
     }
-    
+
     @inlinable
     public var isSuffixEmpty: Bool {
       if _suffix != nil { return false }
@@ -103,7 +103,7 @@ extension Rope {
         }
       }
     }
-    
+
     @inlinable
     var _firstSuffixItem: Rope._Item {
       get {
@@ -168,7 +168,7 @@ extension Rope {
       }
       return true
     }
-    
+
     @inlinable
     public mutating func mutatingForEachSuffix<R>(
       _ body: (inout Element) -> R?
@@ -184,12 +184,12 @@ extension Rope {
       }
       return nil
     }
-    
+
     @inlinable
     public mutating func insertBeforeTip(_ item: __owned Element) {
       _insertBeforeTip(Rope._Item(item))
     }
-    
+
     @inlinable
     mutating func _insertBeforeTip(_ item: __owned Rope._Item) {
       guard !item.isEmpty else { return }
@@ -205,7 +205,7 @@ extension Rope {
       _appendNow(prefix)
       self._prefix = item
     }
-    
+
     @inlinable
     mutating func _appendNow(_ item: __owned Rope._Item) {
       assert(self._prefix == nil)
@@ -219,7 +219,7 @@ extension Rope {
       }
       _invariantCheck()
     }
-    
+
     @inlinable
     public mutating func insertBeforeTip(_ rope: __owned Rope) {
       guard rope._root != nil else { return }
@@ -260,7 +260,7 @@ extension Rope {
           }
           self._appendNow(leaf)
         }
-        
+
         if node.isFull {
           self._appendNow(node)
         } else {
@@ -268,7 +268,7 @@ extension Rope {
         }
         return
       }
-      
+
       if var prefix = self._prefix._take() {
         if !prefix.isUndersized || !node.firstItem.rebalance(prevNeighbor: &prefix) {
           self._appendNow(prefix)
@@ -295,7 +295,7 @@ extension Rope {
           }
           previous.prepend(_prefixTrees.removeLast())
         }
-        
+
         if previous._height == new.height {
           if previous.root.rebalance(nextNeighbor: &new) {
             new = previous.root
@@ -304,14 +304,14 @@ extension Rope {
           }
           continue
         }
-        
+
         if new.isFull, !previous.root.isFull, previous._height == new.height + 1 {
           // Graft node under the last sapling, as a new child branch.
           previous.root._appendNode(new)
           new = previous.root
           continue
         }
-        
+
         // The new seedling can be appended to the line and we're done.
         _prefixTrees.append(previous)
         break
@@ -339,14 +339,14 @@ extension Rope {
       }
       self._suffix = item
     }
-    
+
     @inlinable
     public mutating func insertAfterTip(_ rope: __owned Rope) {
       assert(_suffix == nil)
       assert(_suffixTrees.isEmpty || rope._height <= _suffixTrees.last!._height)
       _suffixTrees.append(rope)
     }
-    
+
     @inlinable
     mutating func _insertAfterTip(_ rope: __owned Rope._Node) {
       insertAfterTip(Rope(root: rope))
@@ -428,7 +428,7 @@ extension Rope {
       rope._invariantCheck()
       return rope
     }
-    
+
     @inlinable
     public func _invariantCheck() {
 #if COLLECTIONS_INTERNAL_CHECKS
@@ -450,9 +450,9 @@ extension Rope {
         h = tree._height
       }
 #endif
-      
+
     }
-    
+
     public func _dump(heightLimit: Int = Int.max) {
       for i in self._prefixTrees.indices {
         print("Sapling \(i):")

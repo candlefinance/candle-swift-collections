@@ -10,7 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 import CollectionsBenchmark
-@_spi(Testing) import DequeModule
+@_spi(Testing) import CandleDequeModule
 
 extension Deque {
   @inline(__always)
@@ -510,7 +510,7 @@ extension Benchmark {
         blackHole(deque)
       }
     }
-    
+
     self.add(
       title: "Deque<Int> equality, unique",
       input: Int.self
@@ -523,7 +523,7 @@ extension Benchmark {
         }
       }
     }
-    
+
     self.add(
       title: "Deque<Int> equality, shared",
       input: Int.self
@@ -536,6 +536,6 @@ extension Benchmark {
         }
       }
     }
-    
+
   }
 }
