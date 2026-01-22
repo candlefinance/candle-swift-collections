@@ -220,26 +220,6 @@ let targets: [CustomTarget] = [
 
   .target(
     kind: .exported,
-    name: "HashTreeCollections",
-    dependencies: ["CandleInternalCollectionsUtilities"],
-    exclude: ["CMakeLists.txt"]),
-  .target(
-    kind: .test,
-    name: "HashTreeCollectionsTests",
-    dependencies: ["HashTreeCollections", "_CollectionsTestSupport"]),
-
-  .target(
-    kind: .exported,
-    name: "HeapModule",
-    dependencies: ["CandleInternalCollectionsUtilities"],
-    exclude: ["CMakeLists.txt"]),
-  .target(
-    kind: .test,
-    name: "HeapTests",
-    dependencies: ["HeapModule", "_CollectionsTestSupport"]),
-
-  .target(
-    kind: .exported,
     name: "CandleOrderedCollections",
     dependencies: ["CandleInternalCollectionsUtilities"],
     exclude: ["CMakeLists.txt"]),
@@ -247,17 +227,6 @@ let targets: [CustomTarget] = [
     kind: .test,
     name: "OrderedCollectionsTests",
     dependencies: ["CandleOrderedCollections", "_CollectionsTestSupport"]),
-
-  .target(
-    kind: .exported,
-    name: "_RopeModule",
-    dependencies: ["CandleInternalCollectionsUtilities"],
-    directory: "RopeModule",
-    exclude: ["CMakeLists.txt"]),
-  .target(
-    kind: .test,
-    name: "RopeModuleTests",
-    dependencies: ["_RopeModule", "_CollectionsTestSupport"]),
 ]
 
 var _products: [Product] = []
