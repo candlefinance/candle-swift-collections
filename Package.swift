@@ -243,7 +243,7 @@ if defines.contains("COLLECTIONS_SINGLE_MODULE") {
 }
 
 let package = Package(
-  name: "candle-swift-collections",
+  name: "swift-collections",
   products: _products,
   targets: _targets
 )
