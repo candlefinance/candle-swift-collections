@@ -306,7 +306,7 @@ if defines.contains("COLLECTIONS_SINGLE_MODULE") {
 }
 
 let package = Package(
-  name: "swift-collections",
+  name: "candle-swift-collections",
   products: _products,
   targets: _targets
 )
