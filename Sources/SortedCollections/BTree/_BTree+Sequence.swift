@@ -10,7 +10,6 @@
 //===----------------------------------------------------------------------===//
 
 extension _BTree: Sequence {
-  @inlinable
   internal func forEach(_ body: (Element) throws -> Void) rethrows {
     func loop(node: Unmanaged<Node.Storage>) throws {
       try node._withUnsafeGuaranteedRef { storage in
@@ -34,20 +33,12 @@ extension _BTree: Sequence {
     
     try loop(node: .passUnretained(self.root.storage))
   }
-  
-  @usableFromInline
   internal struct Iterator: IteratorProtocol {
-    @usableFromInline
     internal let tree: _BTree
-    
-    @usableFromInline
     internal var slots: [Slot]
-    
-    @usableFromInline
     internal var path: [Unmanaged<Node.Storage>]
     
     /// Creates an iterator to the element within a tree corresponding to a specific index
-    @inlinable
     @inline(__always)
     internal init(forTree tree: _BTree, startingAt index: Index) {
       self.tree = tree
@@ -81,7 +72,6 @@ extension _BTree: Sequence {
     }
     
     /// Creates an iterator to the first element within a tree.
-    @inlinable
     @inline(__always)
     internal init(forTree tree: _BTree) {
       self.tree = tree
@@ -110,8 +100,6 @@ extension _BTree: Sequence {
         }
       }
     }
-    
-    @inlinable
     @inline(__always)
     internal mutating func _advanceState(withLeaf handle: Node.UnsafeHandle) {
       // If we're not a leaf, descend to the next child
@@ -159,8 +147,6 @@ extension _BTree: Sequence {
         }
       }
     }
-    
-    @inlinable
     @inline(never)
     internal mutating func next() -> Element? {
       // Check slot sentinel value for end of tree.
@@ -181,8 +167,6 @@ extension _BTree: Sequence {
       return element
     }
   }
-  
-  @inlinable
   internal func makeIterator() -> Iterator {
     return Iterator(forTree: self)
   }

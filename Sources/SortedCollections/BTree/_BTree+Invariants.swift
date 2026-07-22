@@ -86,7 +86,6 @@ extension _BTree {
   }
   
   @inline(never)
-  @usableFromInline
   internal func checkInvariants() {
     checkInvariants(
       for: root,
@@ -95,7 +94,6 @@ extension _BTree {
     )
   }
   #else
-  @inlinable
   @inline(__always)
   internal func checkInvariants() {}
   #endif // COLLECTIONS_INTERNAL_CHECKS

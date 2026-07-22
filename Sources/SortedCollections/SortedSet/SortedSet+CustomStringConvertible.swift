@@ -10,7 +10,6 @@
 //===----------------------------------------------------------------------===//
 
 extension SortedSet: CustomStringConvertible, CustomDebugStringConvertible {
-  @inlinable
   public var description: String {
     var result = "["
     var first = true
@@ -25,8 +24,6 @@ extension SortedSet: CustomStringConvertible, CustomDebugStringConvertible {
     result += "]"
     return result
   }
-  
-  @inlinable
   public var debugDescription: String {
     var result = "SortedSet<\(Element.self)>(["
     var first = true

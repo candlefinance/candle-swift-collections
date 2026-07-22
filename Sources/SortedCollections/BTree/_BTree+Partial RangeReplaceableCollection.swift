@@ -14,7 +14,6 @@ extension _BTree {
   ///
   /// - Complexity: O(`n log n`) where `n` is the number of key-value pairs in the
   ///   sorted dictionary.
-  @inlinable
   @inline(__always)
   public func filter(
     _ isIncluded: (Element) throws -> Bool
@@ -32,7 +31,6 @@ extension _BTree {
   /// Removes the first element of a tree, if it exists.
   ///
   /// - Returns: The moved last element of the tree.
-  @inlinable
   @discardableResult
   internal mutating func popLast() -> Element? {
     invalidateIndices()
@@ -43,8 +41,6 @@ extension _BTree {
     self._balanceRoot()
     return removedElement
   }
-  
-  @inlinable
   @inline(__always)
   @discardableResult
   public mutating func removeLast() -> Element {
@@ -54,8 +50,6 @@ extension _BTree {
       preconditionFailure("Can't remove last element from an empty collection")
     }
   }
-
-  @inlinable
   @inline(__always)
   public mutating func removeLast(_ k: Int) {
     assert(0 <= k && k <= self.count, "Can't remove more items from a collection than it contains")
@@ -68,7 +62,6 @@ extension _BTree {
   /// Removes the first element of a tree, if it exists.
   ///
   /// - Returns: The moved first element of the tree.
-  @inlinable
   @inline(__always)
   @discardableResult
   internal mutating func popFirst() -> Element? {
@@ -80,8 +73,6 @@ extension _BTree {
     self._balanceRoot()
     return removedElement
   }
-  
-  @inlinable
   @inline(__always)
   @discardableResult
   public mutating func removeFirst() -> Element {
@@ -91,8 +82,6 @@ extension _BTree {
       preconditionFailure("Can't remove first element from an empty collection")
     }
   }
-  
-  @inlinable
   @inline(__always)
   public mutating func removeFirst(_ k: Int) {
     assert(0 <= k && k <= self.count, "Can't remove more items from a collection than it contains")
@@ -106,7 +95,6 @@ extension _BTree {
   ///
   /// - Parameter index: a valid index of the tree, not `endIndex`
   /// - Returns: The moved element of the tree
-  @inlinable
   @inline(__always)
   @discardableResult
   internal mutating func remove(at index: Index) -> Element {
@@ -116,7 +104,6 @@ extension _BTree {
   }
   
   // MARK: Bulk Removal
-  @inlinable
   @inline(__always)
   internal mutating func removeAll() {
     invalidateIndices()
@@ -125,7 +112,6 @@ extension _BTree {
   }
   
   /// Removes the elements in the specified subrange from the collection.
-  @inlinable
   internal mutating func removeSubrange(_ bounds: Range<Index>) {
     guard bounds.lowerBound != endIndex else { preconditionFailure("Index out of bounds.") }
     guard bounds.upperBound != endIndex else { preconditionFailure("Index out of bounds.") }

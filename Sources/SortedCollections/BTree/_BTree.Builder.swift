@@ -58,9 +58,7 @@ extension _BTree {
   ///
   /// Appending works by filling in a seedling, once a seedling is full, and an associated separator has been
   /// provided, the seedling-separator pair can be appended to the stack.
-  @usableFromInline
   internal struct Builder {
-    @usableFromInline
     enum State {
       /// The builder needs to add a separator to the node
       case addingSeparator
@@ -68,17 +66,9 @@ extension _BTree {
       /// The builder needs to try to append to the seedling node.
       case appendingToSeedling
     }
-    
-    @usableFromInline
     internal var _saplings: [Node]
-    
-    @usableFromInline
     internal var _separators: [Element]
-    
-    @usableFromInline
     internal var _seedling: Node?
-    
-    @inlinable
     @inline(__always)
     internal var seedling: Node {
       get {
@@ -95,25 +85,14 @@ extension _BTree {
         yield &value
       }
     }
-    
-    @usableFromInline
     internal var state: State
-    
-    @usableFromInline
     internal let leafCapacity: Int
-    
-    @usableFromInline
     internal let internalCapacity: Int
-    
-    @usableFromInline
     internal let deduplicating: Bool
-    
-    @usableFromInline
     internal var lastKey: Key?
     
     /// Creates a new B-Tree builder with default capacities
     /// - Parameter deduplicating: Whether duplicates should be removed.
-    @inlinable
     @inline(__always)
     internal init(deduplicating: Bool = false) {
       self.init(
@@ -127,7 +106,6 @@ extension _BTree {
     /// - Parameters:
     ///   - deduplicating: Whether duplicates should be removed.
     ///   - capacity: The amount of elements per node.
-    @inlinable
     @inline(__always)
     internal init(deduplicating: Bool = false, capacity: Int) {
       self.init(
@@ -142,7 +120,6 @@ extension _BTree {
     ///   - deduplicating: Whether duplicates should be removed.
     ///   - leafCapacity: The amount of elements per leaf node.
     ///   - internalCapacity: The amount of elements per internal node.
-    @inlinable
     @inline(__always)
     internal init(
       deduplicating: Bool = false,
@@ -163,7 +140,6 @@ extension _BTree {
     }
     
     /// Pops a sapling and it's associated separator
-    @inlinable
     @inline(__always)
     internal mutating func popSapling()
       -> (leftNode: Node, separator: Element)? {
@@ -174,7 +150,6 @@ extension _BTree {
     }
     
     /// Appends a sapling with an associated separator
-    @inlinable
     @inline(__always)
     internal mutating func appendSapling(
       _ sapling: __owned Node,
@@ -185,7 +160,6 @@ extension _BTree {
     }
     
     /// Appends a sequence of sorted values to the tree
-    @inlinable
     @inline(__always)
     internal mutating func append<S: Sequence>(
       contentsOf sequence: S
@@ -197,7 +171,6 @@ extension _BTree {
     
     /// Appends a new element to the tree
     /// - Parameter element: Element which is after all previous elements in sorted order.
-    @inlinable
     internal mutating func append(_ element: __owned Element) {
       assert(lastKey == nil || lastKey! <= element.key,
              "New element must be non-decreasing.")
@@ -229,7 +202,6 @@ extension _BTree {
     
     /// Declares that the current seedling is finished with insertion and creates a new seedling to
     /// further operate on.
-    @inlinable
     internal mutating func completeSeedling(
       withSeparator newSeparator: __owned Element
     ) {
@@ -339,7 +311,6 @@ extension _BTree {
     /// This consumes the builder and it is no longer valid to operate on after this.
     ///
     /// - Returns: A usable, fully-filled B-Tree
-    @inlinable
     internal mutating func finish() -> _BTree {
       var root: Node = seedling
       _seedling = nil
@@ -362,7 +333,6 @@ extension _BTree {
 
 extension _BTree.Builder where Value == Void {
   /// Appends a value to a B-Tree builder without values.
-  @inlinable
   @inline(__always)
   internal mutating func append(_ key: __owned Key) {
     self.append((key, ()))
